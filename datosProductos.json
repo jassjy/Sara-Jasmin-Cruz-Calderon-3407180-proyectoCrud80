@@ -1,18 +1,26 @@
 [
   {
     "id": 1,
-    "nombre": "Teclado mecánico RGB",
-    "precio": 189900,
-    "stock": 25,
+    "nombre": "Teclado RGB PRO",
+    "precio": 220000,
+    "stock": 15,
     "categoria": "Perifericos",
     "imagen": null
   },
   {
-    "id": 2,
-    "nombre": "Mouse inalámbrico",
-    "precio": 79900,
-    "stock": 40,
+    "id": 3,
+    "nombre": "Monitor 24 pulgadas",
+    "precio": 650000,
+    "stock": 10,
     "categoria": "Perifericos",
+    "imagen": null
+  },
+  {
+    "id": 4,
+    "nombre": "Audifonos Bluetooth",
+    "precio": 120000,
+    "stock": 20,
+    "categoria": "Audio",
     "imagen": null
   }
 ]
