@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nombre": "Teclado mecánico RGB",
+    "precio": 189900,
+    "stock": 25,
+    "categoria": "Perifericos",
+    "imagen": null
+  },
+  {
+    "id": 2,
+    "nombre": "Mouse inalámbrico",
+    "precio": 79900,
+    "stock": 40,
+    "categoria": "Perifericos",
+    "imagen": null
+  }
+]
