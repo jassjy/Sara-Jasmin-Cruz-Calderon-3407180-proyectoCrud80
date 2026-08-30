@@ -1,9 +1,12 @@
+//importacion de dotenv, para leer las variables de entorno del archivo .env
+import "dotenv/config"
+
 //importacion del paquete de express, sistema moderno (import)
 import miExpress from "express"
 
 //creacion de mi aplicacion de express
 const miApp = miExpress()
-const miPuerto = 3333
+const miPuerto = process.env.MIPUERTO || 3333
 
 //endpoint raiz, no tiene ruta
 miApp.get("/", (req, res) => { res.send(`<h1>Api Rest Productos la 80</h1>`) })
