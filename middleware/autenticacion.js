@@ -1,7 +1,7 @@
 const jwtoken = require ("jsonwebtoken")
 const autenticacionToken = (req, res, next) =>{
     //formato del token = Bearer <token>.
-    const token = req.header("authentication").split(" ")[1]
+    const token = req.header("autenticacion").split(" ")[1]
     if (token){return res.status(401).json({mensaje:"Acceso denegado, no provee un token."})
         //401 no envia las credenciales
         //403 envio las credenciales pero no son validas

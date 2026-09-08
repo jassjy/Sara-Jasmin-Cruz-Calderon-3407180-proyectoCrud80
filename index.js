@@ -150,7 +150,7 @@ app.use(manejoErrores)
 
 //MIDDLEWARE DE AUTENTICACION
 app.use(autenticacion);
-app.get("/rutaProtegida", (req,res)=>{
+app.get("/rutaprotegida", autenticacion , (req,res)=>{
     res.send("Ruta protegida")
 })
 
