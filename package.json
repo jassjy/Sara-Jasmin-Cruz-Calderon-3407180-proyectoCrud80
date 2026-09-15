@@ -1,21 +1,21 @@
 {
-  "name": "crudex80",
+  "name": "api-rest-productos-la-80",
   "version": "1.0.0",
-  "type": "commonjs",
-  "description": "",
+  "description": "API REST de productos y usuarios con autenticacion JWT",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
-    "bcryptjs": "^3.0.3",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.22.2",
-    "jsonwebtoken": "^9.0.3",
-    "multer": "^2.3.0"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.1"
   },
-  "author": "Sara Jasmin Cruz Calderon",
-  "license": "ISC"
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }

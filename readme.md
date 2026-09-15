@@ -1,306 +1,110 @@
-## COMANDOS
+# API REST Productos - La 80
 
-LISTA DE COMANDOS
-npm install express
+API REST construida con Node.js y Express para gestionar productos y usuarios, con autenticacion mediante JWT y subida de imagenes.
 
-npm init -y
+## Estructura del proyecto
 
-npm run dev : para iniciar el servidor
+```
+.
+│   .env
+│   .env.example
+│   .gitignore
+│   app.js
+│   datosProductos.json
+│   datosUsuarios.json
+│   index.js
+│   package.json
+│   readme.md
+│
+├───src
+│   ├───config
+│   │       db.js
+│   │
+│   ├───controllers
+│   │       productosController.js
+│   │       usuariosController.js
+│   │
+│   ├───middleware
+│   │       authMiddleware.js
+│   │       manejadorErrores.js
+│   │       registroMiddleware.js
+│   │
+│   ├───models
+│   │       productosModel.js
+│   │       usuariosModel.js
+│   │
+│   ├───routes
+│   │       productosRoutes.js
+│   │       usuariosRoutes.js
+│   │
+│   └───utils
+│           validaciones.js
+│
+└───uploads
+        (imagenes subidas de productos)
+```
 
-comandos de sguridad:
+## Instalacion
 
-git config --global --list
+```bash
+npm install
+cp .env.example .env
+# editar .env y definir un JWT_SECRET propio
+npm start
+```
 
-//////
+El servidor queda disponible en `http://localhost:3000`.
 
-git branch -r : ver ramas remotas git
+## Autenticacion
 
-git fetch --all : actuliza el remoto
+1. Registrar un usuario: `POST /api/users/register`
+2. Iniciar sesion: `POST /api/users/login` → devuelve un `token`
+3. Usar el token en las rutas protegidas con el header:
+   `Authorization: Bearer <token>`
 
-git branch commonjs origin/commonjs
+## Endpoints
 
-git add .
+### Usuarios
 
-git commit -m "lista"
+| Metodo | Ruta                | Protegida | Descripcion               |
+|--------|----------------------|-----------|----------------------------|
+| POST   | /api/users/register  | No        | Crea un usuario            |
+| POST   | /api/users/login     | No        | Inicia sesion, retorna JWT |
+| GET    | /api/users/me         | Si        | Perfil del usuario actual  |
 
-///
-
-git checkout main
-
-git branch
-
-git checkout "commit"
-
-git checkout -b "" // crear rama
-
-git branch : ver ramas
-
-//
-
-## PROYECTO CRUD 
-
-node --watch index.js 
-
-npm install dotenv
-
-.env
-
-🧪 Probar GET todos
-
-Inicia:
-
-npm run dev
-
-En LiteClient:
-
-GET http://localhost:3030/api/productos
-
-Respuesta:
-
-[
-    {
-        "id": 1,
-        "nombre": "Laptop Lenovo",
-        "precio": 2500000,
-        "stock": 10,
-        "categoria": "Tecnologia",
-        "imagen": null
-    },
-    {
-        "id": 2,
-        "nombre": "Mouse Logitech",
-        "precio": 85000,
-        "stock": 25,
-        "categoria": "Accesorios",
-        "imagen": null
-    }
-]
-20. 🔎 GET por ID
-GET http://localhost:3030/api/productos/1
-
-Respuesta:
-
+Body de registro (JSON):
+```json
 {
-    "id": 1,
-    "nombre": "Laptop Lenovo",
-    "precio": 2500000,
-    "stock": 10,
-    "categoria": "Tecnologia",
-    "imagen": null
+  "nombre": "Juan Perez",
+  "email": "juan@example.com",
+  "password": "123456"
 }
+```
 
-Si buscas:
-
-GET http://localhost:3030/api/productos/99
-
-Obtendrás:
-
+Body de login (JSON):
+```json
 {
-    "mensaje": "Producto no encontrado"
+  "email": "juan@example.com",
+  "password": "123456"
 }
+```
 
-Con estado:
+### Productos
 
-404 Not Found
-21. ➕ POST crear producto
+| Metodo | Ruta               | Protegida | Descripcion                          |
+|--------|----------------------|-----------|----------------------------------------|
+| GET    | /api/products         | No        | Lista todos los productos              |
+| GET    | /api/products/:id      | No        | Obtiene un producto por id             |
+| POST   | /api/products          | Si        | Crea un producto (multipart/form-data) |
+| PUT    | /api/products/:id       | Si        | Actualiza un producto                  |
+| DELETE | /api/products/:id       | Si        | Elimina un producto                    |
 
-En LiteClient:
+Para crear/actualizar un producto se puede enviar `multipart/form-data` con los campos:
+`nombre`, `precio`, `stock`, `categoria` y opcionalmente un archivo `imagen`.
 
-POST http://localhost:3030/api/productos
+Las imagenes quedan disponibles en `http://localhost:3000/uploads/<archivo>`.
 
-Selecciona:
+## Notas
 
-Body → JSON
-
-Envía:
-
-{
-    "nombre": "Teclado Gamer",
-    "precio": 150000,
-    "stock": 15,
-    "categoria": "Accesorios"
-}
-
-Respuesta:
-
-{
-    "mensaje": "Producto creado correctamente",
-    "producto": {
-        "id": 3,
-        "nombre": "Teclado Gamer",
-        "precio": 150000,
-        "stock": 15,
-        "categoria": "Accesorios",
-        "imagen": null
-    }
-}
-
-Estado:
-
-201 Created
-
-El taller pide que los campos nombre, precio, stock y categoria sean obligatorios y que una falla de validación produzca 400 Bad Request.
-
-22. ❌ Probar POST incorrecto
-
-Por ejemplo:
-
-{
-    "nombre": "Mouse",
-    "precio": 50000
-}
-
-Faltan:
-
-stock
-categoria
-
-Respuesta:
-
-{
-    "mensaje": "Nombre, precio, stock y categoria son obligatorios"
-}
-
-Estado:
-
-400 Bad Request
-23. ❌ Precio incorrecto
-{
-    "nombre": "Mouse",
-    "precio": -500,
-    "stock": 5,
-    "categoria": "Accesorios"
-}
-
-Respuesta:
-
-{
-    "mensaje": "El precio debe ser un número mayor a 0"
-}
-24. ❌ Stock incorrecto
-{
-    "nombre": "Mouse",
-    "precio": 50000,
-    "stock": -5,
-    "categoria": "Accesorios"
-}
-
-Respuesta:
-
-{
-    "mensaje": "El stock debe ser un entero positivo o 0"
-}
-25. ✏️ PUT actualizar
-
-URL:
-
-PUT http://localhost:3030/api/productos/1
-
-Body:
-
-{
-    "nombre": "Laptop Lenovo Actualizada",
-    "precio": 2800000,
-    "stock": 20,
-    "categoria": "Tecnologia"
-}
-
-Respuesta:
-
-{
-    "mensaje": "Producto actualizado correctamente",
-    "producto": {
-        "id": 1,
-        "nombre": "Laptop Lenovo Actualizada",
-        "precio": 2800000,
-        "stock": 20,
-        "categoria": "Tecnologia",
-        "imagen": null
-    }
-}
-26. ❌ PUT con ID inexistente
-PUT http://localhost:3030/api/productos/100
-
-Respuesta:
-
-{
-    "mensaje": "Producto no encontrado"
-}
-
-Estado:
-
-404 Not Found
-
-El PDF especifica que PUT debe aplicar las mismas validaciones y devolver 404 cuando el ID no existe.
-
-27. 🗑️ DELETE
-
-URL:
-
-DELETE http://localhost:3030/api/productos/2
-
-Respuesta:
-
-{
-    "mensaje": "Producto eliminado correctamente",
-    "producto": {
-        "id": 2,
-        "nombre": "Mouse Logitech",
-        "precio": 85000,
-        "stock": 25,
-        "categoria": "Accesorios",
-        "imagen": null
-    }
-}
-
-
-## multer imagenes 
-
-npm install multer
-
-Commonjs - tradicional
-
-ESM - MODERNO
-
-Typescript - tipo
-
-## Middleware express
-
-importacion 
-
-index :
-
-const registroMiddleware  = require("./middleware/registroMiddleware") 
-miApp.use(registroMiddleware); 
-
-
-middleware/registroMiddleware: 
-
-const registroMiddleware = (req,res,next)=>{
-    const tiempoMillisegundos = Date.now()
-    const tiempoUTC = new Date().toISOString()
-    //console.log(`Millisegundo: ${tiempoMillisegundos}
-    //    UTC:${tiempoUTC}`)
-    //Mostrar informacion de la solicitud entrante
-    console.log(`[${tiempoUTC}: ${req.method} - ${req.url} - ${req.ip}]`)
-    //Escuchamos evento 'finish' pareasaber cuando termina la respuesta
-    res.on('finish',()=>{
-        const duracion = Date.now() - tiempoMillisegundos;
-        console.log(tiempoUTC, 'response', res.statusCode, duracion +'ms');
-
-    });
-    next()
-}
-
-module.exports = registroMiddleware
-
-
-
-## json web token jwt 
-
-npm install jsonwebtoken 
-
-npm install bcryptjs 
-
-
-Es una cadena firmada que confirma un usuario autenticado
+- El almacenamiento es en archivos JSON (`datosProductos.json` y `datosUsuarios.json`), no se requiere una base de datos externa para ejecutar el proyecto.
+- `src/config/db.js` centraliza la lectura/escritura de esos archivos, para facilitar migrar a una base de datos real en el futuro.
