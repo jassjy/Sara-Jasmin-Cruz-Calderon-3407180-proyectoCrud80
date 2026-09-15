@@ -4,7 +4,7 @@ const registroMiddleware = (req,res,next)=>{
     //console.log(`Millisegundo: ${tiempoMillisegundos}
     //    UTC:${tiempoUTC}`)
     //Mostrar informacion de la solicitud entrante
-    console.log(`[${tiempoUTC}: ${req.method} - ${req.url} - ${req.ip}]`)
+    console.log(`[${tiempoUTC}] ${req.method} - ${req.url} - ${req.ip}`)
     //Escuchamos evento 'finish' pareasaber cuando termina la respuesta
     res.on('finish',()=>{
         const duracion = Date.now() - tiempoMillisegundos;
