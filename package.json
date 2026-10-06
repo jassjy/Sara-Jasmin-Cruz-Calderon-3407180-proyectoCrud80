@@ -4,12 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch index.js"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.2.1"
-  }
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanlith340-droid/proyectoCrud80.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sanlith340-droid/proyectoCrud80/issues"
+  },
+  "homepage": "https://github.com/sanlith340-droid/proyectoCrud80#readme"
 }
