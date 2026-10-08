@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const usuariosModel = require("../models/usuariosModel");
+const listarUsuarios = require("../models/usuariosModel")
 // =====================================================
 // POST /api/usuarios/registro
 // =====================================================
@@ -90,7 +91,20 @@ const iniciarSesion = async (req, res) => {
     }
 };
 
+//listar todos los usuario
+const listarController = async(req, res)=>{
+    const usuarios = await listarUsuarios
+    try {
+        //solicitar servicio, o modelo de bd
+        res.status(200).json({Listado: usuarios})
+    } catch (error) {
+       res.status(500).json({Error: error.message}) 
+    }
+    
+}
+
 module.exports = {
     registrar,
-    iniciarSesion
+    iniciarSesion,
+    listarController
 };

@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const usuariosController = require("../controllers/usuariosController");
+const {registrar, iniciarSesion, listarController} = require("../controllers/usuariosController");
+//const usuariosController = require("../controllers/usuariosController");
 
 // Estas rutas son PÚBLICAS (no llevan el middleware de autenticación)
-router.post("/registro", usuariosController.registrar);
-router.post("/login", usuariosController.iniciarSesion);
+router.post("/registro", registrar);
+router.post("/login", iniciarSesion);
+router.get("/listado", listarController)
 
 module.exports = router;

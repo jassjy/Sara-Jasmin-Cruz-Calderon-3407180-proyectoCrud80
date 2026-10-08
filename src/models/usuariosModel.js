@@ -58,9 +58,19 @@ function crearUsuario({ nombre, email, password }) {
     return nuevoUsuario;
 }
 
+const listarUsuarios = ()=>{
+    //usar el conector de base de datos
+    const datos =[
+        {"nombre": "Jhonny", "cargo":"Instructor", "Ficha":3407180},
+        {"nombre": "Ana", "cargo":"Aprendiz", "Ficha":3407180}
+    ]
+    return datos
+}
+
 module.exports = {
     leerUsuarios,
     guardarUsuarios,
     buscarPorEmail,
-    crearUsuario
+    crearUsuario,
+    listarUsuarios
 };
