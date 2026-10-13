@@ -1,26 +1,41 @@
-const { Router } = require("express")
 
-const listarProductos = (req,res)=>{
-    res.json ({mensaje:"listado de productos"})
-}
+const listar = require("../models/productosModel");
 
+const listarProductos = async (req, res) => {
+    try {
+        // Obtener el listado de productos utilizando el modelo
+        const productos = await listar.listar();
 
-const listarUnProducto = (req,res)=>{
-    res.json ({mensaje:"Ruta de listado de un producto"})
-}
+        res.status(200).json(productos);
 
-const crearProducto = (req,res)=>{
-    res.json ({mensaje:"crear productos"})
-}
+    } catch (error) {
+        res.status(500).json({
+            Error: error.message
+        });
+    }
+};
 
-const eliminarProducto = (req,res)=>{
-    res.json ({mensaje:"eliminar productos"})
-}
+const listarUnProducto = (req, res) => {
+    res.json({
+        mensaje: "Ruta de listado de un producto"
+    });
+};
 
+const crearProducto = (req, res) => {
+    res.json({
+        mensaje: "Crear productos"
+    });
+};
 
+const eliminarProducto = (req, res) => {
+    res.json({
+        mensaje: "Eliminar productos"
+    });
+};
 
-
-module.exports = {listarProductos,
-listarUnProducto,
-crearProducto,
-eliminarProducto}
+module.exports = {
+    listarProductos,
+    listarUnProducto,
+    crearProducto,
+    eliminarProducto
+};
