@@ -8,10 +8,10 @@ const datos= [
 
 const listar = async () => {
     //consulta a bd con await
+    
     return datos;
 };
 
 
-module.exports = {
-    listar
-};
+module.exports = {listar}
+

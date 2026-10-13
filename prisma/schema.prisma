@@ -11,3 +11,20 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+
+// use prisma-8
+
+model Usuarios {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  clave String
+}
+
+model Productos {
+  id       Int    @id @default(autoincrement())
+  nombre   String
+  detalle  String      
+  precio   Int
+}

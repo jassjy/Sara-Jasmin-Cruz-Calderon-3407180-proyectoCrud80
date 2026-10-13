@@ -37,6 +37,12 @@ git branch : ver ramas
 
 //
 
+
+CREATE DATABASE "db3407180";
+
+
+
+
 ## PROYECTO CRUD 
 
 node --watch index.js 
