@@ -20,14 +20,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanlith340-droid/proyectoCrud80.git"
+    "url": "git+https://github.com/jassjy/Sara-Jasmin-Cruz-Calderon-3407180-proyectoCrud80.git"
   },
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/sanlith340-droid/proyectoCrud80/issues"
+    "url": "https://github.com/jassjy/Sara-Jasmin-Cruz-Calderon-3407180-proyectoCrud80/issues"
   },
-  "homepage": "https://github.com/sanlith340-droid/proyectoCrud80#readme",
+  "homepage": "https://github.com/jassjy/Sara-Jasmin-Cruz-Calderon-3407180-proyectoCrud80#readme",
   "devDependencies": {
-    "@prisma/client": "^7.10.0"
+    "@prisma/client": "^7.10.0",
+    "prisma": "^7.10.0",
+    "tsx": "^4.23.15"
   }
 }

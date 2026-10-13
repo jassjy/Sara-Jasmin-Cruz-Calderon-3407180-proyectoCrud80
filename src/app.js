@@ -7,7 +7,7 @@ const app = express();
 
 //app usar middleware body-parse
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 
 //app usara una ruta predeterminada "/api", con un enrutador
 app.use("/api", enrutador);
