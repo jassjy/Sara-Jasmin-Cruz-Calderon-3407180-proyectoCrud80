@@ -17,6 +17,8 @@ git branch -r : ver ramas remotas git
 
 git fetch --all : actuliza el remoto
 
+git switch --track origin/estructura/commonjs-explicacion
+
 git branch commonjs origin/commonjs
 
 git add .
@@ -312,6 +314,22 @@ npm install bcryptjs
 Es una cadena firmada que confirma un usuario autenticado
 
 
-*prueba 2
+CLASE 20-10-2026
 
-2s
+ROUTER - CONTROLLER - SERVICE (MODEL)
+
+
+1. APP.JS    /API
+2. INDEX.JS - / USUARIOS
+3.USUARIOSROUTER.JS - /LISTADO
+
+
+npm install -D  prisma@7
+npm install -D @prisma/client@7
+npm install -D @prisma/adapter-pg@7
+npm install -D prisma@7 tsx 
+
+
+npx prisma init --datasource-provider postgresql
+npx prisma migrate dev --name inicio
+npx prisma generate
