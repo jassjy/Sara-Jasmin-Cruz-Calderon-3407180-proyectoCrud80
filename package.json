@@ -10,7 +10,7 @@
   "keywords": [],
   "license": "ISC",
   "dependencies": {
-    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/adapter-pg": "^7.10.1",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/jassjy/Sara-Jasmin-Cruz-Calderon-3407180-proyectoCrud80#readme",
   "devDependencies": {
-    "@prisma/client": "^7.10.0",
-    "prisma": "^7.10.0",
+    "@prisma/client": "^7.10.1",
+    "prisma": "^7.10.1",
     "tsx": "^4.23.15"
   }
 }

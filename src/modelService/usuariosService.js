@@ -2,43 +2,57 @@ const fs = require("fs");
 const { rutaUsuarios } = require("../config/db");
 const ormPrisma = require("../config/conexion");
 
-// =====================================================
-// ASEGURAR QUE EL ARCHIVO DE USUARIOS EXISTA
-// =====================================================
 
-function asegurarArchivo() {
-    if (!fs.existsSync(rutaUsuarios)) {
-        fs.writeFileSync(rutaUsuarios, JSON.stringify([], null, 2));
-    }
-}
-
-// =====================================================
 // CREAR USUARIO
-// =====================================================
 
-const crearUsuario = async (email,name,clave)=> {
-    const nuevoUsuario = await ormPrisma.usuarios.create({data:
-        {email: email, name: name , clave: clave}
-        })
-        return nuevoUsuario
-    }
-
+const crearUsuario = async (email, name, clave) => {
+    const nuevoUsuario = await ormPrisma.usuarios.create({
+        data: { email: email, name: name, clave: clave }
+    });
+    return nuevoUsuario;
+};
 
 
-const listarUsuarios = ()=>{
-    //usar el conector de base de datos
-   //{const datos =[
-       // {"nombre": "Jhonny", "cargo":"Instructor", "Ficha":3407180},
-       // {"nombre": "Ana", "cargo":"Aprendiz", "Ficha":3407180}
-  //  ]
-   // return datos;
-//}
-   const datos = ormPrisma.usuarios.findMany()
-   return datos;
+// LISTAR USUARIOS
 
-}
+const listarUsuarios = () => {
+    const datos = ormPrisma.usuarios.findMany();
+    return datos;
+};
+
+// OBTENER USUARIO POR ID
+
+const obtenerUsuarioPorId = (id) => {
+    const datos = ormPrisma.usuarios.findUnique({
+        where: { id: Number(id) }
+    });
+    return datos;
+};
+
+// ACTUALIZAR USUARIO
+
+const actualizarUsuario = (id, data) => {
+    const datos = ormPrisma.usuarios.update({
+        where: { id: Number(id) },
+        data: data
+    });
+    return datos;
+};
+
+
+// ELIMINAR USUARIO
+
+const eliminarUsuario = (id) => {
+    const datos = ormPrisma.usuarios.delete({
+        where: { id: Number(id) }
+    });
+    return datos;
+};
 
 module.exports = {
     crearUsuario,
-    listarUsuarios
+    listarUsuarios,
+    obtenerUsuarioPorId,
+    actualizarUsuario,
+    eliminarUsuario
 };
